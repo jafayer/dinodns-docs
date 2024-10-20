@@ -1,0 +1,9 @@
+{
+    "label": "Internal Plugins",
+    "position": 4,
+    "link": {
+      "type": "generated-index",
+      "description": "Learn about the internal plugins of the DinoDNS framework."
+    }
+  }
+  

@@ -1,0 +1,9 @@
+{
+    "label": "Core Library",
+    "position": 3,
+    "link": {
+      "type": "generated-index",
+      "description": "Learn about the core library of the Docusaurus framework."
+    }
+  }
+  
