@@ -1,4 +1,4 @@
-# DinoDNS
+# DinoDNS Documentation 🦕
 
 Note: like [DinoDNS](https://github.com/jafayer/dinodns) itself, these docs are a work in progress. Their purpose is to describe the general conceptual overview of the framework. Separate API documentation will be made available soon.
 
