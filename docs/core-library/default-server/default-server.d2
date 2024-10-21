@@ -1,0 +1,20 @@
+direction: right
+
+Clients: {shape: cloud}
+
+Clients <-> DefaultServer.Networks
+
+DefaultServer: {
+  Networks: {
+    DNSOverTCP
+    DNSOverUDP
+  }
+
+  Router: {
+    Plugins
+  }
+
+  Networks <-> Router
+
+  Router.Plugins -> Router.Plugins
+}
