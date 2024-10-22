@@ -5,7 +5,7 @@ sidebar_position: 4
 
 Networks are the interfaces handle serializing queries and dispatching responses. Networks are responsible both for creating a server on their underlying protocol, and serializing messages out of the DNS wire format for their protocol. As such, defining a network typically involves defining both the base Network class, as well as a serializer.
 
-The only packaged networks that are included in DinoDNS are `DNSOverTCP` and `DNSOverUDP`. However, there is also a `DNSOverHTTP` plugin that can be installed which supports HTTP/S.
+The only packaged networks that are included in DinoDNS are `DNSOverTCP` and `DNSOverUDP`. However, there is also a `DNSOverHTTP` plugin that can be installed which supports HTTP/S. This was done to reduce bundled dependencies, as the `DNSOverHTTP` class has external dependencies.
 
 ## Usage
 

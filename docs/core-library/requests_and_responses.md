@@ -17,7 +17,7 @@ The request and response objects are made available to your route handler when y
 
 ```ts title="handler.ts"
 server.handle('example.com', (req, res) => {
-    const {name, type} = req.questions[0];
+    const {name, type} = req.packet.questions[0];
     // do something with the response
 });
 ```
@@ -99,10 +99,17 @@ res.packet.answers = [
 
 res.resolve()
 ```
+:::warning
+For safety (and to support runtime errors when attempting to modify an already-sent response), `res.packet.answers` is a **readonly array**. This means that you can override it entirely, but you cannot append to it, remove from it, or modify its children. You can, of course, modify it immutably like such:
+```ts
+res.packet.answers = [...res.packet.answers, {name, type, data}]
+```
+:::
+
 
 ## Error responses
 
-If you instead want to send an error response, the `Response` class also has a helpful "errors" property. Calling a function on the `errors` automatically sets the correct flags in the headers, and sends the response back to the client.
+If you instead want to send an error response, the `Response` class also has a helpful "errors" object. Calling a function on the `errors` object automatically sets the correct flags in the headers, and sends the response back to the client.
 
 The four supported errors this way are:
 
