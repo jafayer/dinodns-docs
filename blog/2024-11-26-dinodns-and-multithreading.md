@@ -1,14 +1,14 @@
 ---
 slug: dinodns-and-multithreading
-title: DinoDNS v0.0.12
+title: DinoDNS v0.0.13
 authors: [jafayer]
 tags: [updates]
 preview: 
 ---
-DinoDNS v0.0.12 is a major release that brings us closer to a stable launch (which we'll be versioning as 0.1.x). In this launch, we've introduced the higher-level `DinoDNS` class that builds on the DefaultServer class for low-configuration DNS servers, and multithreading support!
+DinoDNS v0.0.13 is a major release that brings us closer to a stable launch (which we'll be versioning as 0.1.x). In this launch, we've introduced the higher-level `DinoDNS` class that builds on the DefaultServer class for low-configuration DNS servers, and multithreading support!
 <!-- truncate -->
 
-As we get closer to a stable release, we'll also be putting out some concrete performance tests. Early load tests suggest promising results compared to prior benchmarks for CoreDNS.
+As we get closer to a stable release, we'll also be putting out some concrete performance tests. Early load tests suggest promising results compared to prior benchmarks for CoreDNS. Expect those in the coming weeks.
 
 ## `DinoDNS` class
 
@@ -24,4 +24,6 @@ To read more about multithreading support, see the [DefaultServer docs](/core-li
 
 ## Breaking interface changes
 
-There are several breaking interface changes introduced in v0.0.11 and v0.0.12. Notably, we've standardized the network interfaces to all use the same basic shape, and to accept an object instead of ordered parameters.
+There are several breaking interface changes introduced in v0.0.11, v0.0.12, and v0.0.13. Notably, we've standardized the network interfaces to all use the same basic shape, and to accept an object instead of ordered parameters.
+
+We're also considering changes to the `Store` interface in a coming release.
