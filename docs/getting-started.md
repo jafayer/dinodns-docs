@@ -35,8 +35,8 @@ const server = new DinoDNS({
     cache: cache,
     logger: logger,
     networks: [
-        new DNSOverTCP("localhost", 1053),
-        new DNSOverUDP("localhost", 1053),
+        new DNSOverTCP({address: "localhost", port: 1053}),
+        new DNSOverUDP({address: "localhost", port: 1053}),
     ]
 });
 ```
@@ -53,8 +53,8 @@ import { DNSOverTCP, DNSOverUDP } from "dinodns/networks";
 
 const server = new DefaultServer({
     networks: [
-        new DNSOverTCP("localhost", 1053),
-        new DNSOverUDP("localhost", 1053),
+        new DNSOverTCP({address: "localhost", port: 1053}),
+        new DNSOverUDP({address: "localhost", port: 1053}),
     ]
 });
 ```
