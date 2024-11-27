@@ -20,3 +20,20 @@ new DefaultServer({
         res.errors.nxDomain();
     }
 });
+```
+
+## Multithreaded Support
+
+`DefaultServer` also has support for multithreading via [Node.js's cluster mode](https://nodejs.org/api/cluster.html).
+
+To enable multithreading, simply pass in the boolean `multithreaded` parameter to the constructor of the `DefaultServer` class.
+
+```ts title="multithreading.ts"
+new DefaultServer({
+    networks,
+    multithreaded: true,
+});
+```
+:::warning
+Multithreading may not work properly with all plugins. Cluster mode recreates the server in each thread and load balances between them, so each thread will have its own copy of the server and its own local state. As such, workloads that depend on changing record sets should rely on external storage plugins like the [Redis store plugin](https://github.com/jafayer/dinodns-redis-storage).
+:::
