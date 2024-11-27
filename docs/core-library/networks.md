@@ -13,7 +13,7 @@ Networks are passed into the server's `networks` parameter. You can pass in any 
 
 ```ts
 new DefaultServer({
-    networks: [new DNSOverTCP('localhost', 53), new DNSOverTCP('localhost', 1053)],
+    networks: [new DNSOverTCP({address: 'localhost', port: 53}), new DNSOverTCP({address: 'localhost', port: 1053})],
     ...
 })
 ```
