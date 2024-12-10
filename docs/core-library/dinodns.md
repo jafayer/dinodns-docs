@@ -34,4 +34,16 @@ const server = new DinoDNS({
     new DNSOverUDP({ address: '0.0.0.0', port: 1053 })
   ],
 });
+
+// you can still use server.use
+server.use((req, res, next) => {
+  console.log(`Request from ${req.connection.remoteAddress}`);
+  next();
+});
+
+// and server.handle
+server.handle('ns1.mynameserver.com', (req, res) => {
+  // useful for setting up glue records defined statically
+  // outside of your dynamic zone storage
+});
 ```

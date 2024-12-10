@@ -5,12 +5,6 @@ title: Requests & Responses
 
 Requests and responses are the classes you'll most interact with in your handlers. Like Express, DinoDNS gives you access to the full request and response object for each handler in the chain. Modifications are allowed to both, allowing you to rewrite parts of the request or construct the response.
 
-:::warning
-
-Like Express, attempting to send more than one response to the client or attempting to modify the response after it has been sent will throw an error. Guard against this by checking `res.finished` before sending a response.
-
-:::
-
 ## Interface
 
 The request and response objects are made available to your route handler when you register it:
@@ -30,11 +24,7 @@ It helps to be familiar with the [dns-packet](https://www.npmjs.com/package/dns-
 
 Request and response also expose access to a `connection` property which exposes some information about the client and the type of connection.
 
-:::tip
-The response object is also an event emitter that emits a `done` event when it answers a query via one of the methods discussed below. You can subscribe to this event to dispatch an action asynchronously in a handler after a response has been sent back to a client. This is especially useful for logging purposes.
-
-For more information about how this is accomplished, see the [ConsoleLogger class](https://github.com/jafayer/DinoDNS/blob/main/src/plugins/loggers/ConsoleLogger/index.ts).
-:::
+The `Response` object is also an event emitter that emits an `answer` and `done` event when it answers a query via one of the methods discussed below. `answer` is fired once a handler answers the query, and `done` is fired once the response has been sent back to the client (including network latency). You can subscribe to these events to dispatch an action asynchronously in a handler after a response has been handled.
 
 For more information, visit the [API reference](https://api.dinodns.dev).
 
@@ -43,6 +33,8 @@ For more information, visit the [API reference](https://api.dinodns.dev).
 There are two ways to respond to a request: `res.answer` and `res.resolve`.
 
 Answers provided in either way are statically type-checked at compile time, ensuring your responses are well-formed and their data types match the types expected by the dns-packet library.
+
+Like Express, attempting to send more than one response to the client or attempting to modify the response after it has been sent will throw an error. Guard against this by checking `res.finished` before sending a response.
 
 :::danger
 There is **no runtime type checking** currently built into the library, so if you have zone data read from I/O it is still possible that runtime type errors will occur.
@@ -111,13 +103,18 @@ res.packet.answers = [...res.packet.answers, {name, type, data}]
 
 If you instead want to send an error response, the `Response` class also has a helpful "errors" object. Calling a function on the `errors` object automatically sets the correct flags in the headers, and sends the response back to the client.
 
-The four supported errors this way are:
+The supported errors this way are:
 
 ```ts title="errors.ts"
+res.errors.formatError();
+res.errors.notAuth();
 res.errors.notImplemented();
+res.errors.notZone();
 res.errors.nxDomain();
 res.errors.refused();
 res.errors.serverFailure();
+res.errors.yxDomain();
+res.errors.yxRRSet();
 ```
 
 Like other responses, be careful not to attempt to send a response after calling an error method, as this marks the packet as finished.

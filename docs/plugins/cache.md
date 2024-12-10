@@ -7,7 +7,7 @@ Cache plugins implement a similar interface to storage plugins, but there are a 
 
 While stores are intended to support both exact and wildcard matches, cache plugins are intended to support only exact matches. This helps keep cache plugins fast for lookups, and keeps the logic for implementing a cache simple.
 
-Store plugins _also_ do not support queries to get more than one record type for a given domain. This is, likewise, in an effort to reduce hierarchical data structures down to a single lookup. For example, the `DefaultCache` plugin stores records in a map with keys `{domain}:{recordType}`. This constrains the cache to O(1) lookups for all queries that might be run against the cache.
+Cache plugins also _do not_ support queries to get more than one record type for a given domain. This is, likewise, in an effort to reduce hierarchical data structures down to a single lookup. For example, the `DefaultCache` plugin stores records in a flat map with keys `{domain}:{recordType}`. This constrains the cache to O(1) lookups for all queries that might be run against the cache.
 
 ```ts title="cache.ts"
 const cache = new DefaultCache();
